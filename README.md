@@ -1,5 +1,8 @@
 https://www.youtube.com/watch?v=sBws8MSXN7A
 
+### `npm i uuid`
+This is used to generate random numbers. Run this after `npm install`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

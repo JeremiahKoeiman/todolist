@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 import Header from './components/layout/Header';
+import uuid from 'uuid'
 
 import './App.css';
 
@@ -8,17 +10,17 @@ import './App.css';
 var initState = {
   todos: [
     {
-      id: 1,
+      id: uuid.v4(),
       title: 'Take out the trash',
       completed: false
     },
     {
-      id: 2,
+      id: uuid.v4(),
       title: 'Dinner at home',
       completed: false
     },
     {
-      id: 3,
+      id: uuid.v4(),
       title: 'Meeting with boss',
       completed: false
     }
@@ -79,6 +81,17 @@ function App() {
     
   }
 
+  //Add todo
+  function addTodo(title) {
+    //create new Todo & add it to the state
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      completed: false
+    }
+    setState({ todos: [...state.todos, newTodo] })
+  }
+
   return (
     <div className="App">
        {/*
@@ -92,7 +105,7 @@ function App() {
 
        */}
        <Header/>
-
+       <AddTodo addTodo={addTodo}/>
       <Todos todos={state.todos} updatedTodo={updateTodo} deletedTodo={deleteTodo} /> {/* pass updatedTodo*/}
 
     </div>
