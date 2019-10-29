@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Todos from './components/Todos';
+import Header from './components/layout/Header';
 
 import './App.css';
 
@@ -11,7 +12,7 @@ var initState = {
     {
       id: 1,
       title: 'Take out the trash',
-      completed: true
+      completed: false
     },
     {
       id: 2,
@@ -75,15 +76,9 @@ function App() {
 
   // Delete Todo
   function deleteTodo(id) {
-    //setState({ todo: [...state.todos.filter(todo => todo.id !== id)] })
-
-    const todos = state.todos.map((task) => {
-      if (task.id === id)
-        return id
-      else
-        return task
-    })
-    setState({ ...state, todos })
+    //(spread or) copy todos & filter them. Return any todo that's id !== to the id passed in the function
+    setState({ todos: [...state.todos.filter(todo => todo.id !== id)] })
+    
   }
 
   return (
