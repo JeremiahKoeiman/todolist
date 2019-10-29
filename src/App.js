@@ -1,5 +1,3 @@
-//Advanced version (needs to be checked out)
-
 import React, { useState } from 'react';
 import Todos from './components/Todos';
 import Header from './components/layout/Header';
@@ -93,6 +91,7 @@ function App() {
       }
 
        */}
+       <Header/>
 
       <Todos todos={state.todos} updatedTodo={updateTodo} deletedTodo={deleteTodo} /> {/* pass updatedTodo*/}
 
