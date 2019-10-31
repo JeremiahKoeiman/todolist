@@ -12,23 +12,7 @@ import './App.css';
 
 
 var initState = {
-  todos: [
-    {
-      id: uuid.v4(),
-      title: 'Take out the trash',
-      completed: false
-    },
-    {
-      id: uuid.v4(),
-      title: 'Dinner at home',
-      completed: false
-    },
-    {
-      id: uuid.v4(),
-      title: 'Meeting with boss',
-      completed: false
-    }
-  ]
+  todos: []
 }
 
 
@@ -39,6 +23,18 @@ function App() {
  // useState is the method used to check the state of an object. The parametre is the initState object created above. It checks the state of te mentioned object.
 
  const [state, setState] = useState(initState)
+
+ window.onload = async function () {
+    const link = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
+    const result = await link.json();
+    setState({ todos: result })
+    /*result.map(item => {
+      const json = console.log('id: '+item.id, 'title: '+item.title, 'completed: '+item.completed)
+      return json
+    })*/
+    console.log(result)
+  }
+
 
 
 /**
