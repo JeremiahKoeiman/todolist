@@ -14,8 +14,8 @@ function Todos(props) { // props parameter for attributes
 // PropTypes
 Todos.propTypes = { // object of props
   todos: Proptypes.array.isRequired, // todos is the prop, it's an array and it is set to be required
-  markComplete: Proptypes.Func.isRequired, // markComplete is the prop, it's an function and it is set to be required
-  delTodo: Proptypes.Func.isRequired, // delTodo is the prop, it's an function and it is set to be required
+  markComplete: Proptypes.func.isRequired, // markComplete is the prop, it's an function and it is set to be required
+  delTodo: Proptypes.func.isRequired, // delTodo is the prop, it's an function and it is set to be required
 }
 
 export default Todos;
