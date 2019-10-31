@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import Header from './components/layout/Header';
-import uuid from 'uuid'
+import About from "./components/pages/About";
+import uuid from 'uuid';
 
 import './App.css';
 
@@ -93,8 +97,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-       {/*
+      <Router>
+        <div className="App">
+          {/*
 
        {
         //When clicked on button, call the setState funtion and give as parametre the completed funtion and give that as parametre the state of the object
@@ -104,11 +109,16 @@ function App() {
       }
 
        */}
-       <Header/>
-       <AddTodo addTodo={addTodo}/>
-      <Todos todos={state.todos} updatedTodo={updateTodo} deletedTodo={deleteTodo} /> {/* pass updatedTodo*/}
-
-    </div>
+          <Header/>
+          <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={addTodo}/>
+                <Todos todos={state.todos} updatedTodo={updateTodo} deletedTodo={deleteTodo} /> {/* pass updatedTodo*/}
+              </React.Fragment>
+          )} />
+          <Route path="/about" component={About}/>
+        </div>
+      </Router>
   );
 }
 
