@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import Axios from 'axios';
+
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import Header from './components/layout/Header';
 import About from "./components/pages/About";
-import uuid from 'uuid';
+//import uuid from 'uuid';
 
 import './App.css';
 
@@ -24,15 +26,14 @@ function App() {
 
  const [state, setState] = useState(initState)
 
- window.onload = async function () {
-    const link = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
-    const result = await link.json();
-    setState({ todos: result })
+ window.onload = () => {
+     Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+         .then(response => setState({ todos: response.data }));
+    //setState({ todos: res })
     /*result.map(item => {
       const json = console.log('id: '+item.id, 'title: '+item.title, 'completed: '+item.completed)
       return json
     })*/
-    console.log(result)
   }
 
 
@@ -76,20 +77,21 @@ function App() {
 
   // Delete Todo
   function deleteTodo(id) {
-    //(spread or) copy todos & filter them. Return any todo that's id !== to the id passed in the function
-    setState({ todos: [...state.todos.filter(todo => todo.id !== id)] })
+      //get id in url & delete that one. Receive Promise & update state
+      Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+          .then( () => setState({ todos: [...state.todos.filter(todo => todo.id !== id)] }))
     
   }
 
   //Add todo
   function addTodo(title) {
-    //create new Todo & add it to the state
-    const newTodo = {
-      id: uuid.v4(),
-      title,
-      completed: false
-    }
-    setState({ todos: [...state.todos, newTodo] })
+    //create new Todo, do a post request to jsonplaceholder, the data that needs to be send with t are the title & completed & receive the promise & add to state
+    Axios.post('https://jsonplaceholder.typicode.com/todos', {
+        title,
+        completed: false
+    })
+        .then(res => setState({ todos: [...state.todos, res.data] }))
+
   }
 
   return (

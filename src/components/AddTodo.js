@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Proptypes from 'prop-types';
 
 var addState = {
     title: ''
@@ -33,6 +34,13 @@ function AddTodo(props) {
             />
         </form>
     )
+}
+
+// PropTypes
+AddTodo.propTypes = { // object of props
+    addTodo: Proptypes.Func.isRequired, // todo is the prop and it an function and is set to be required
+    markComplete: Proptypes.Func.isRequired, // markComplete is the prop, it's an function and it is set to be required
+    delTodo: Proptypes.Func.isRequired, // delTodo is the prop, it's an function and it is set to be required
 }
 
 export default AddTodo;
